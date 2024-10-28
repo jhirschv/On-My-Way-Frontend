@@ -3,8 +3,17 @@ import { router } from "expo-router";
 import { View, Text, Image, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../components/CustomButton";
+import { Redirect, Tabs } from "expo-router";
+import { useState, useContext, useEffect } from 'react'
+import AuthContext from './context/AuthContext';
 
 const Welcome = () => {
+
+  
+  const { user } = useContext(AuthContext);
+
+  if (user) return <Redirect href="/home" />;
+
 
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -15,26 +24,12 @@ const Welcome = () => {
       >
         <View className="w-full flex justify-center items-center h-full px-4">
           <View className="relative mt-5">
-            <Text className="text-3xl text-white font-bold text-center">
-              Discover Endless{"\n"}
-              Possibilities with{" "}
-              <Text className="text-secondary-200">On My Way</Text>
-            </Text>
+            <Text className="text-secondary text-3xl text-white font-bold text-center">On My Way</Text>
           </View>
-
-          <Text className="text-sm font-pregular text-gray-100 mt-7 text-center">
-            Where Creativity Meets Innovation: Embark on a Journey of Limitless
-            Exploration with On My Way
-          </Text>
 
           <CustomButton
             title="Continue with Email"
             handlePress={() => router.push("/sign-in")}
-            containerStyles="w-full mt-7"
-          />
-          <CustomButton
-            title="Home"
-            handlePress={() => router.push("/home")}
             containerStyles="w-full mt-7"
           />
         </View>

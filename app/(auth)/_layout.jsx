@@ -1,5 +1,7 @@
 import { Redirect, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import AuthContext from '../context/AuthContext';
+import { useEffect, useContext } from "react";
 
 const AuthLayout = () => {
 

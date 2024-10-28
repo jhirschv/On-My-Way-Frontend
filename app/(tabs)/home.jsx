@@ -5,13 +5,18 @@ import CustomButton from "../../components/CustomButton";
 
 const Home = () => {
   return (
-    <SafeAreaView className="bg-primary flex-1 flex items-center justify-center px-4">
-      <Text className='text-white text-3xl font semibold'>Home</Text>
+    <SafeAreaView className="bg-primary flex-1 flex px-4">
       <CustomButton
-            title="Index"
+            title="Create New Task"
             handlePress={() => router.push("/")}
             containerStyles="w-full mt-7"
           />
+      {/* <CustomButton
+            title="Index"
+            handlePress={() => router.push("/")}
+            containerStyles="w-full mt-7"
+          /> */}
+
     </SafeAreaView>
   );
 };

@@ -1,14 +1,30 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, ScrollView, Dimensions} from "react-native";
 import CustomButton from "../../components/CustomButton";
 import FormField from "../../components/FormField";
+import AuthContext from '../context/AuthContext'
+import apiClient from '../services/apiClient';
+import { jwtDecode } from 'jwt-decode';
 
 
 const SignIn = () => {
+
+  let {loginUser, setUser, setAuthTokens} = useContext(AuthContext)
+
+  const handleSubmit = async () => {
+    const { username, password } = form;
+
+    if (!username || !password) {
+      Alert.alert('Missing Fields', 'Please enter both username and password.');
+      return;
+    }
+    const response = await loginUser(username, password);
+  };
+
   const [form, setForm] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -26,11 +42,10 @@ const SignIn = () => {
           </Text>
 
           <FormField
-            title="Email"
-            value={form.email}
-            handleChangeText={(e) => setForm({ ...form, email: e })}
+            title="username"
+            value={form.username}
+            handleChangeText={(e) => setForm({ ...form, username: e })}
             otherStyles="mt-7"
-            keyboardType="email-address"
           />
 
           <FormField
@@ -42,7 +57,7 @@ const SignIn = () => {
 
           <CustomButton
             title="Sign In"
-            handlePress={() => router.push("/home")}
+            handlePress={handleSubmit}
             containerStyles="mt-7"
           />
 

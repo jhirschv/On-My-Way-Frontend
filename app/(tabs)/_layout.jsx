@@ -1,13 +1,18 @@
 import { StatusBar } from "expo-status-bar";
 import { Redirect, Tabs } from "expo-router";
+import { useState, useContext, useEffect } from 'react'
+import AuthContext from '../context/AuthContext';
 
 const TabLayout = () => {
+
+  const { user } = useContext(AuthContext);
+
+  if (!user) return <Redirect href="/" />;
 
   return (
     <>
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: "#FFA001",
           tabBarInactiveTintColor: "#CDCDE0",
           tabBarStyle: {
             backgroundColor: "#161622",
@@ -28,6 +33,13 @@ const TabLayout = () => {
           name="profile"
           options={{
             title: "Profile",
+            headerShown: false,
+          }}
+        />
+        <Tabs.Screen
+          name="create"
+          options={{
+            title: "Create",
             headerShown: false,
           }}
         />
